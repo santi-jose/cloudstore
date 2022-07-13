@@ -54,7 +54,7 @@ def execute_query(connection, query):
         print(f"Error: '{err}'")
 
 #establish connection to mySQL server
-connection = create_server_connection("localhost", "root", 'sqlV0idprogr@m')
+connection = create_server_connection("localhost", "root", 'PASSWORD')
 
 #create database 
 create_database_query = "CREATE DATABASE school"
@@ -113,7 +113,7 @@ create_course_table = """
 """
 
 # connect to the SCHOOL database
-connection = create_db_connection("localhost", "root", 'sqlV0idprogr@m', 'School')
+connection = create_db_connection("localhost", "root", 'PASSWORD', 'School')
 
 #execute our defined query
 execute_query(connection, create_teacher_table)
@@ -154,7 +154,7 @@ CREATE TABLE takes_course(
 );
 """
 
-# connection = create_db_connection("localhost", "root", "sqlV0idprogr@m", "School")
+# connection = create_db_connection("localhost", "root", "PASSWORD", "School")
 
 execute_query(connection, alter_participant)
 execute_query(connection, alter_course)
@@ -174,7 +174,7 @@ INSERT INTO teacher VALUES
 (6, 'Niamh', 'Murphy', 'ENG', 'IRI', '1995-09-08', 67890, '+491231231232');
 """
 
-# connection = create_db_connection("localhost", "root", "sqlV0idprogr@m", "School")
+# connection = create_db_connection("localhost", "root", "PASSWORD", "School")
 execute_query(connection, pop_teacher)
 
 pop_client = """
@@ -238,7 +238,7 @@ INSERT INTO takes_course VALUES
 (113, 19);
 """
 
-# connection = create_db_connection("localhost", "root", "sqlV0idprogr@m", "School")
+# connection = create_db_connection("localhost", "root", "PASSWORD", "School")
 execute_query(connection, pop_client)
 execute_query(connection, pop_participant)
 execute_query(connection, pop_course)
@@ -260,7 +260,7 @@ def read_query(connection, query):
 # FROM teacher;
 # """
 
-# connection = create_db_connection("localhost", "root", "sqlV0idprogr@m", "school")
+# connection = create_db_connection("localhost", "root", "PASSWORD", "school")
 # results = read_query(connection, q1)
 
 # for result in results:
@@ -274,7 +274,7 @@ ON course.client = client.client_id
 WHERE course.in_school = FALSE;
 """
 
-#connection = create_db_connection("localhost", "root", "sqlV0idprogr@m", "school")
+#connection = create_db_connection("localhost", "root", "PASSWORD", "school")
 results = read_query(connection, q5)
 
 # for result in results:
@@ -334,7 +334,7 @@ SET tax_id = 23456
 WHERE teacher_id = 2;
 """
 
-# connection = create_db_connection("localhost", "root", "sqlV0idprogr@m", "school")
+# connection = create_db_connection("localhost", "root", "PASSWORD", "school")
 # execute_query(connection, update)
 
 # FIXED MISTAKE WITH TEACHER_ID = 2 TAX_ID
@@ -367,7 +367,7 @@ WHERE course_id = 20;
 # FROM course;
 # """
 
-# connection = create_db_connection("localhost", "root", "sqlV0idprogr@m", "school")
+# connection = create_db_connection("localhost", "root", "PASSWORD", "school")
 
 #before delete
 # print("BEFORE DELETE: ")
@@ -404,7 +404,7 @@ val = [
     (8, 'Sue', 'Perkins', 'MAN', 'ENG', '1976-02-02', 22222, '+491443456432')
 ]
 
-# connection = create_db_connection("localhost", "root", "sqlV0idprogr@m", "school")
+# connection = create_db_connection("localhost", "root", "PASSWORD", "school")
 # execute_list_query(connection, sql, val)
 
 q1 = """
