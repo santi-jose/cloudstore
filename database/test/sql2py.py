@@ -2,7 +2,6 @@ from tkinter import N
 from os import curdir
 import mysql.connector
 from mysql.connector import Error
-import pandas as pd
 
 # Python CRUD functions for SQL databases
 
