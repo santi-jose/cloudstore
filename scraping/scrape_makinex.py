@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
+import pandas as pd
+
 
 # look for products being sold on Makinex for $x or less
 # identify:
@@ -21,7 +23,12 @@ def find_product():
     # get the products
     soup = BeautifulSoup(html_text, 'lxml')
     products = soup.find_all('div', class_='wpb_column vc_column_container vc_col-sm-6')
-    
+
+    # lists to store data
+    names = []
+    prices = []
+    links = []
+
     # loop through products
     for product in products:
         
@@ -29,13 +36,17 @@ def find_product():
         price = product.find('h6').text
         price_str = price[1:len(price)].translate({ord('$'): None, ord(','): None})
         price_float = float(price_str) #store price as int
+
         if price_float <= price_ceiling:
             name = product.find('h3').text
             link = product.find('a')['href']
-            print(f'Product Name: {name}')
-            print(f'Price: {price}') 
-            print(f'More Info: {link}')
-            print('')
+            names.append(name)
+            prices.append(price)
+            links.append(link)
+
+    data = {'Product Name': names, 'Price': prices, 'More Info': links}
+    df = pd.DataFrame(data)
+    print(df)
     
 
 find_product()
