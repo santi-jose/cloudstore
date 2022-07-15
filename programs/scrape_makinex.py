@@ -39,6 +39,7 @@ def products_df():
         
         if price_float <= price_ceiling:
             name = product.find('h3').text
+            name = name.replace('\n',' ') # replace \n with space ' '
             link = product.find('a')['href']
             names.append(name)
             prices.append(price)
@@ -46,5 +47,5 @@ def products_df():
 
     data = {'Product Name': names, 'Price': prices, 'More Info': links}
     df = pd.DataFrame(data)
-    print(df)
+    #print(df)
     return df
