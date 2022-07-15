@@ -9,6 +9,8 @@ import pandas as pd
 # - Manufacturer
 # - Price
 # - Link to Product Listing
+# - Product category
+# - Image Link
 
 def products_df():
     print('Enter a price ceiling for the products')
@@ -21,13 +23,15 @@ def products_df():
     html_text = requests.get(url, headers=headers).text
 
     # get the products
-    soup = BeautifulSoup(html_text, 'lxml')
+    soup = BeautifulSoup(html_text, 'html.parser')
     products = soup.find_all('div', class_='wpb_column vc_column_container vc_col-sm-6')
 
     # lists to store data
     names = []
     prices = []
     links = []
+    category = []
+    images = []
 
     # loop through products
     for product in products:
@@ -40,11 +44,33 @@ def products_df():
         if price_float <= price_ceiling:
             name = product.find('h3').text
             link = product.find('a')['href']
+
+            # getting image link and category
+            image = product.find('img')
+            imageLink = image.attrs['src']
+
+            productPage = requests.get(link, headers=headers).text
+            soup = BeautifulSoup(productPage, "html.parser")
+            try:
+                cat = soup.find('span', class_="posted_in").text.strip('Category:')
+            except:
+                cat = 'none'
+
             names.append(name)
             prices.append(price)
             links.append(link)
+            images.append(imageLink)
+            category.append(cat)
 
-    data = {'Product Name': names, 'Price': prices, 'More Info': links}
+    data = {'Product Name': names, 'Price': prices, 'More Info': links, 'Image Link': images, 'Category': category}
     df = pd.DataFrame(data)
     print(df)
     return df
+
+#saving product image 
+def get_image(productName, imageLink, headers):
+    image = requests.get(imageLink, headers=headers, stream=True)
+    if image.status_code == 200:
+        with open("/path/to/image/{}.jpg".format(productName), 'wb') as f:
+            image.raw.decode_content = True
+            shutil.copyfileobj(image.raw, f)
