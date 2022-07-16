@@ -30,7 +30,7 @@ def products_df():
     names = []
     prices = []
     links = []
-    category = []
+    categories = []
     images = []
 
     # loop through products
@@ -53,17 +53,17 @@ def products_df():
             productPage = requests.get(link, headers=headers).text
             soup = BeautifulSoup(productPage, "html.parser")
             try:
-                cat = soup.find('span', class_="posted_in").text.strip('Category:')
+                category = soup.find('span', class_="posted_in").text.strip('Category:')
             except:
-                cat = 'none'
+                category = 'none'
 
             names.append(name)
             prices.append(price)
             links.append(link)
             images.append(imageLink)
-            category.append(cat)
+            categories.append(category)
 
-    data = {'Product Name': names, 'Price': prices, 'More Info': links, 'Image Link': images, 'Category': category}
+    data = {'Product Name': names, 'Price': prices, 'More Info': links, 'Image Link': images, 'Category': categories}
     df = pd.DataFrame(data)
     #print(df)
     return df
