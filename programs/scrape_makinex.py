@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
-
+import shutil
 
 # look for products being sold on Makinex for $x or less
 # identify:
