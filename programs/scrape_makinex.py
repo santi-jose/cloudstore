@@ -29,6 +29,7 @@ def products_df():
     # lists to store data
     names = []
     prices = []
+    manufacturers = []
     links = []
     categories = []
     images = []
@@ -59,11 +60,12 @@ def products_df():
 
             names.append(name)
             prices.append(price)
+            manufacturers.append('Makinex')
             links.append(link)
             images.append(imageLink)
             categories.append(category)
 
-    data = {'Product Name': names, 'Price': prices, 'More Info': links, 'Image Link': images, 'Category': categories}
+    data = {'Product Name': names, 'Price': prices, 'Manufacturer': manufacturers,'More Info': links, 'Image Link': images, 'Category': categories}
     df = pd.DataFrame(data)
     #print(df)
     return df
