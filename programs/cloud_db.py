@@ -27,24 +27,21 @@ CREATE TABLE MAKINEX (
     manufacturer VARCHAR(50),
     category VARCHAR(50),
     more_info VARCHAR(100) NOT NULL,
-    img_link VARCHAR(100) NOT NULL
+    img_link VARCHAR(100) NOT NULL,
+    timestamp VARCHAR(50)
 );
 """
 
 execute_query(connection, create_product_table)
 
 sql = """
-    INSERT INTO MAKINEX (product_name, price, manufacturer, category, more_info, img_link)
-    VALUES (%s, %s, %s, %s, %s, %s)
+    INSERT INTO MAKINEX (product_name, price, manufacturer, category, more_info, img_link, timestamp)
+    VALUES (%s, %s, %s, %s, %s, %s, %s)
 """
 
 val = []
 
 for index, row in df.iterrows():
-    # print(row['Product Name'], row['Price'], row['More Info'])
-    val.append([row['Product Name'], row['Price'], row['Manufacturer'], row['Category'], row['More Info'], row['Image Link']])
-    # print(val[index])
-    #execute_list_query(connection, sql, [row['Produt Name'], row['Price'], row['More Info']])
-    # print('')
+    val.append([row['Product Name'], row['Price'], row['Manufacturer'], row['Category'], row['More Info'], row['Image Link'], row['Time']])
 
 execute_list_query(connection, sql, val)
