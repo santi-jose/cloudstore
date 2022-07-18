@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from datetime import datetime
 import requests
 import pandas as pd
 import shutil
@@ -33,6 +34,7 @@ def products_df():
     links = []
     categories = []
     images = []
+    time = []
 
     # loop through products
     for product in products:
@@ -58,14 +60,18 @@ def products_df():
             except:
                 category = 'none'
 
+            # getting time of scrape
+            dt = datetime.now()
+
             names.append(name)
             prices.append(price)
             manufacturers.append('Makinex')
             links.append(link)
             images.append(imageLink)
             categories.append(category)
+            time.append(dt)
 
-    data = {'Product Name': names, 'Price': prices, 'Manufacturer': manufacturers,'More Info': links, 'Image Link': images, 'Category': categories}
+    data = {'Product Name': names, 'Price': prices, 'Manufacturer': manufacturers,'More Info': links, 'Image Link': images, 'Category': categories, 'Time': time}
     df = pd.DataFrame(data)
     #print(df)
     return df
