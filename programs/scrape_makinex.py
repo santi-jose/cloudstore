@@ -13,7 +13,7 @@ import shutil
 # - Product category
 # - Image Link
 
-def products_df():
+def makinex_products_df():
     print('Enter a price ceiling for the products')
     price_ceiling = float(input('>'))
     (print(f'Filtering prices <= {price_ceiling}'))
