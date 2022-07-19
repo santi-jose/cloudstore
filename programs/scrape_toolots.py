@@ -66,11 +66,12 @@ def toolots_products_df():
             manufacturers.append(manufacturer)
             links.append(link)
             images.append(imageLink)
-            # categories.append(category)
+            categories.append('none')
             time.append(dt)
 
-    # data = {'Product Name': names, 'Price': prices, 'Manufacturer': manufacturers,'More Info': links, 'Image Link': images, 'Category': categories, 'Time': time}
-    data = {'Product Name': names, 'Price': prices, 'Manufacturer': manufacturers,'More Info': links, 'Image Link': images, 'Time': time}
+    data = {'Product Name': names, 'Price': prices, 'Manufacturer': manufacturers,'More Info': links, 'Image Link': images, 'Category': categories, 'Time': time}
     df = pd.DataFrame(data)
-    # #print(df)
+    #print(df)
     return df
+
+toolots_products_df()
