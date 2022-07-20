@@ -16,7 +16,7 @@ import shutil
 def victory_products_df():
     print('Enter a price ceiling for the products')
     price_ceiling = float(input('>'))
-    (print(f'Filtering prices <= {price_ceiling}'))
+    print(f'Filtering prices <= {price_ceiling}')
 
     # get the html text
     url = 'https://etractorimplements.com/products/'
