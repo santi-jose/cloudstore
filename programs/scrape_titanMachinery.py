@@ -47,11 +47,7 @@ def titanmachinery_products_df():
     for link in linksInfo:
         links.append(link.get_attribute('href'))
 
-    # get manufacturer
-    for link in links:
-        driver.get(link)
-        item = driver.find_elements("xpath", '//div[@class="detail-specs-item"]') 
-        manufacturers.append(item[1].get_attribute('innerHTML')
+
 
     # get category
     categoryInfo = driver.find_elements("xpath", '//p[@class="card-equipment-category"]')
@@ -61,12 +57,18 @@ def titanmachinery_products_df():
     # get image link
     imageLinks = driver.find_elements("xpath", '//img[@class="card-img"]')
     for ilink in imageLinks:
-        images.append(ilink.get_attribute('src')) 
+        images.append(ilink.get_attribute('src'))
 
+    # get manufacturer
+    for link in links:
+        driver.get(link)
+        item = driver.find_elements("xpath", '//div[@class="detail-specs-item"]') 
+        manufacturers.append(item[1].get_attribute('innerHTML'))
 
     driver.quit()
     data = {'Product Name': names, 'Price': prices, 'Manufacturer': manufacturers, 'More Info': links, 'Image Link': images, 'Category': categories}
     df = pd.DataFrame(data)
+    print(df.head())
     return df
 
 
