@@ -1,6 +1,7 @@
 from scrape_makinex import makinex_products_df
 from scrape_victory import victory_products_df
 from scrape_toolots import toolots_products_df
+from scrape_titanMachinery import titanmachinery_products_df
 from sql2py import create_server_connection
 from sql2py import create_database
 from sql2py import create_db_connection
@@ -83,7 +84,7 @@ victory_val = []
 
 # CREATE TOOLOTS TABLE IN CLOUDSTORE DATABASE
 # make dataframe from toolots product webpage
-toolots_df = toolots_products_df()
+# toolots_df = toolots_products_df()
 
 # toolots product table
 create_toolots_table = """
@@ -98,16 +99,46 @@ CREATE TABLE TOOLOTS (
 );
 """
 
-execute_query(connection, create_toolots_table)
+# execute_query(connection, create_toolots_table)
 
 sql = """
     INSERT INTO TOOLOTS (product_name, price, manufacturer, category, more_info, img_link, timestamp)
     VALUES (%s, %s, %s, %s, %s, %s, %s)
 """
 
-toolots_val = []
+# toolots_val = []
 
-for index, row in toolots_df.iterrows():
-    toolots_val.append([row['Product Name'], row['Price'], row['Manufacturer'], row['Category'], row['More Info'], row['Image Link'], row['Time']])
+# for index, row in toolots_df.iterrows():
+#     toolots_val.append([row['Product Name'], row['Price'], row['Manufacturer'], row['Category'], row['More Info'], row['Image Link'], row['Time']])
 
-execute_list_query(connection, sql, toolots_val)
+# execute_list_query(connection, sql, toolots_val)
+
+# CREATE TITAN MACHINARY TABLE IN CLOUDSTORE DATABASE
+# make dataframe from toolots product webpage
+titan_df = titanmachinery_products_df()
+
+# toolots product table
+create_titan_table = """
+CREATE TABLE TITAN (
+    product_name VARCHAR(150) NOT NULL,
+    price VARCHAR(20),
+    manufacturer VARCHAR(50),
+    category VARCHAR(100),
+    more_info VARCHAR(200) NOT NULL,
+    img_link VARCHAR(200) NOT NULL
+);
+"""
+
+execute_query(connection, create_titan_table)
+
+sql = """
+    INSERT INTO TITAN (product_name, price, manufacturer, category, more_info, img_link)
+    VALUES (%s, %s, %s, %s, %s, %s)
+"""
+
+titan_val = []
+
+for index, row in titan_df.iterrows():
+    titan_val.append([row['Product Name'], row['Price'], row['Manufacturer'], row['Category'], row['More Info'], row['Image Link']])
+
+execute_list_query(connection, sql, titan_val)
