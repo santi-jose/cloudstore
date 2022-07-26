@@ -137,6 +137,3 @@ def victory_products_df():
     df = pd.DataFrame(data)
     # print(df)
     return df
-
-
-# victory_products_df()
