@@ -73,5 +73,3 @@ def toolots_products_df():
     df = pd.DataFrame(data)
     #print(df)
     return df
-
-toolots_products_df()
