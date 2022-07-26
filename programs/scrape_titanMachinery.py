@@ -23,7 +23,7 @@ def titanmachinery_products_df():
     time = []
 
 
-    service = Service('/Users/litzamendez/Documents/chromedriver')
+    service = Service("C:/Users/Jose/Downloads/chromedriver_win32/chromedriver")
     service.start()
     driver = webdriver.Remote(service.service_url)
 
@@ -34,6 +34,9 @@ def titanmachinery_products_df():
     for product in products:
         name = product.get_attribute('innerHTML').strip()
         names.append(name)
+        
+        dt = datetime.now()
+        time.append(dt)
 
     # get the price
     pricesInfo = driver.find_elements("xpath", '//p[@class="card-equipment-price"]')
@@ -66,10 +69,7 @@ def titanmachinery_products_df():
         manufacturers.append(item[1].get_attribute('innerHTML'))
 
     driver.quit()
-    data = {'Product Name': names, 'Price': prices, 'Manufacturer': manufacturers, 'More Info': links, 'Image Link': images, 'Category': categories}
+    data = {'Product Name': names, 'Price': prices, 'Manufacturer': manufacturers, 'More Info': links, 'Image Link': images, 'Category': categories, 'Time': time}
     df = pd.DataFrame(data)
     print(df.head())
     return df
-
-
-titanmachinery_products_df()
