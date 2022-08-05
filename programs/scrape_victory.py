@@ -48,6 +48,11 @@ def victory_products_df():
             link = product.find('a')['href']
             product_page_text = requests.get(link).text
             
+            #Find image link
+            image = product.find('img')
+            imageLink = image['data-src']
+            print(imageLink)
+
             # find cateogry from product page link
             product_soup = BeautifulSoup(product_page_text, 'html.parser')
             menu_items = product_soup.find('nav', class_='woocommerce-breadcrumb')
@@ -56,10 +61,6 @@ def victory_products_df():
             for item in menu_items:
                 if item.text != 'Home':
                     category_str = item.text
-
-            #Find image link
-            image = product.find('img')
-            imageLink = image['data-src']
 
             # timestamp
             dt = datetime.now()
@@ -101,7 +102,7 @@ def victory_products_df():
 
                 if price_float <= price_ceiling:
                     name = product.find('h2', class_='woocommerce-loop-product__title').text
-                    # print(name)
+                    print(name)
                     # print('')
                     link = product.find('a')['href']
                     product_page_text = requests.get(link).text
@@ -114,11 +115,6 @@ def victory_products_df():
                     for item in menu_items:
                         if item.text != 'Home':
                             category_str = item.text
-
-                    #Find image link
-                    image = product.find('img')
-                    # print(image)
-                    imageLink = image['src']
 
                     # timestamp
                     dt = datetime.now()
@@ -135,5 +131,5 @@ def victory_products_df():
 
     data = {'Product Name': names, 'Price': prices, 'Manufacturer': manufacturers, 'More Info': links, 'Image Link': images, 'Category': categories, 'Time': time}
     df = pd.DataFrame(data)
-    # print(df)
+    #print(df)
     return df
